@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mycomplex_ui/colors.dart';
 import 'package:mycomplex_ui/services/auth_service.dart';
 import '../widgets/custom_text_field.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mycomplex_ui/widgets/custom_toast_msg.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -60,31 +61,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
       String emailOrMobile = emailOrMobileController.text.trim();
       String password = passwordController.text.trim();
       Map<String, dynamic> payload = isEmail
-          ? {'email': emailOrMobile, 'password': password}
-          : {'mobile': emailOrMobile, 'password': password};
+          ? {'email': emailOrMobile, 'password': password, 'isEmailSent': isEmail}
+          : {'mobile': emailOrMobile, 'password': password, 'isEmailSent': isEmail};
       try {
         final response = await _authService.signUp(payload);
-        Fluttertoast.showToast(
-          msg: response['message'] ?? 'Sign up successful',
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: AppColors.success,
-          textColor: AppColors.onPrimary,
-          fontSize: 16.0,
-        );
+        _showCustomToast(response['message'] ?? 'Sign up successful', ToastStatus.success, icon: Icons.check_circle);
+        if (mounted) {
+          context.go('/login');
+        }
       } catch (e) {
-        Fluttertoast.showToast(
-          msg: e.toString(),
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: AppColors.error,
-          textColor: AppColors.onPrimary,
-          fontSize: 16.0,
-        );
+        _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
       }
     }
+  }
+
+  void _showCustomToast(String message, ToastStatus status, {IconData icon = Icons.info}) {
+    FToast fToast = FToast();
+    fToast.init(context);
+    Widget toast = CustomToastMsg(message: message, icon: icon, status: status);
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: const Duration(seconds: 2),
+    );
   }
 
   @override
@@ -98,9 +97,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Sign up',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.primary),
+              Image.asset(
+                'assets/images/logo.png',
+                height: 200,
               ),
               const SizedBox(height: 8),
               ToggleButtons(
@@ -108,6 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 onPressed: (int index) {
                   setState(() {
                     isEmail = index == 0;
+                    emailOrMobileController.text = '';
                   });
                 },
                 children: const <Widget>[

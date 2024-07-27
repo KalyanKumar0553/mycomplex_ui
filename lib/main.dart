@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mycomplex_ui/colors.dart';
 import 'package:mycomplex_ui/routes.dart';
 import 'package:mycomplex_ui/screens/dashboard_screen.dart';
 import 'package:mycomplex_ui/screens/forgot_password_screen.dart';
@@ -18,7 +19,37 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'MyComplex - User App',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primaryColor: AppColors.primary,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: AppColors.primary,
+          secondary: AppColors.primary,
+          onPrimary: AppColors.onPrimary,
+        ),
+        scaffoldBackgroundColor: AppColors.background,
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: AppColors.inputFillColor,
+          labelStyle: const TextStyle(color: AppColors.inputLabelColor),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide.none,
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: AppColors.primary,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: AppColors.onPrimary, backgroundColor: AppColors.primary,
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            foregroundColor: AppColors.primary,
+          ),
+        ),
       ),
       routerConfig: router,
     );
@@ -38,8 +69,8 @@ class GradientBackground extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Color.fromARGB(255, 118, 13, 188),
-            Color.fromARGB(255, 107, 12, 112),
+            Color(0xFFAD5472),
+            Color(0xFFAD5472),
           ],
         ),
       ),

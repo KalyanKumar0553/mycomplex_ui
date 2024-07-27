@@ -30,22 +30,22 @@ class CustomTextField extends StatelessWidget {
           labelText: labelText,
           filled: true,
           fillColor: AppColors.inputFillColor,
-          labelStyle: TextStyle(color: Colors.grey.shade600),
-          border: OutlineInputBorder(
+          labelStyle: const TextStyle(color: AppColors.inputLabelColor),
+          border: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide.none,
           ),
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide.none,
           ),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide.none,
           ),
           prefixIcon: prefixIcon,
         ),
-        style: const TextStyle(color: Colors.black38),
+        style: const TextStyle(color: AppColors.textColor),
         validator: validator,
       ),
     );

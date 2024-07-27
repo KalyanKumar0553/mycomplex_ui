@@ -27,7 +27,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             children: [
               Image.asset(
                 'assets/images/logo.png',
-                height: 100,
+                height: 200,
               ),
               const SizedBox(height: 16),
               const Text(

@@ -26,7 +26,8 @@ class LoginScreen extends StatelessWidget {
                 height: 200,
               ),
               const SizedBox(height: 8),
-              const Text('Enter your credential to login',style: TextStyle(color: AppColors.primary)),
+              const Text('Enter your credential to login',style: TextStyle(color: AppColors.primary,fontSize: 15)),
+              const SizedBox(height: 8),
               CustomTextField(
                 labelText: 'Username',
                 controller: usernameController,
