@@ -1,20 +1,23 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesHelper {
-  static const String _bearerTokenKey = "bearer_token";
-
-  static Future<void> saveBearerToken(String token) async {
+  static Future<void> saveValue(String key, String value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_bearerTokenKey, token);
+    await prefs.setString(key, value);
   }
 
-  static Future<String?> getBearerToken() async {
+  static Future<String?> getValue(String key) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_bearerTokenKey);
+    return prefs.getString(key);
   }
 
-  static Future<void> removeBearerToken() async {
+  static Future<void> removeValue(String key) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_bearerTokenKey);
+    await prefs.remove(key);
+  }
+
+  static Future<void> clear() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
   }
 }

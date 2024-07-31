@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mycomplex_ui/screens/signup_screen.dart';
+import 'package:mycomplex_ui/screens/auth/signup_screen.dart';
 
 void main() {
   testWidgets('Signup screen has a title and buttons', (WidgetTester tester) async {

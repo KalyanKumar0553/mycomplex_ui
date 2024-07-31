@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mycomplex_ui/colors.dart';
 import 'package:mycomplex_ui/routes.dart';
-import 'package:mycomplex_ui/screens/dashboard_screen.dart';
-import 'package:mycomplex_ui/screens/forgot_password_screen.dart';
-import 'package:mycomplex_ui/screens/otp_verification_screen.dart';
-import 'screens/login_screen.dart';
-import 'screens/signup_screen.dart';
-import 'splash_screen.dart';
 
 void main() {
   runApp(const MyApp());

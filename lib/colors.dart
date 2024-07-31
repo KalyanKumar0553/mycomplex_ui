@@ -9,4 +9,5 @@ class AppColors {
   static const Color success = Colors.green;
   static const Color error = Color.fromARGB(255, 169, 69, 62);
   static const Color textColor = Color.fromARGB(255, 91, 86, 86);
+  static const Color bottomNavigationButton = Color.fromARGB(255, 232, 167, 167);
 }
