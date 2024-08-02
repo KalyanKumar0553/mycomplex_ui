@@ -3,6 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mycomplex_ui/constants.dart';
 import 'package:mycomplex_ui/helper/shared_preferences_helper.dart';
+import 'package:mycomplex_ui/screens/auth/forgot_password_screen.dart';
+import 'package:mycomplex_ui/screens/auth/signup_screen.dart';
+import 'package:mycomplex_ui/screens/dashboard/dashboard_screen.dart';
 import 'package:mycomplex_ui/widgets/custom_toast_msg.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../colors.dart';
@@ -25,6 +28,12 @@ class _LoginScreenState extends State<LoginScreen> {
   final AuthService _authService = AuthService();
 
   bool isEmail = true;
+
+   @override
+  void initState() {
+    super.initState(); 
+    _checkLoginStatus();
+  }
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -75,7 +84,33 @@ class _LoginScreenState extends State<LoginScreen> {
     return String.fromCharCodes(Iterable.generate(length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
   }
 
+  Future<void> _checkLoginStatus() async {
+    String? token = await SharedPreferencesHelper.getValue(SharedPreferencesKeys.bearerTokenKey);
+    String? userID = await SharedPreferencesHelper.getValue(SharedPreferencesKeys.userIDKey);
+    if (!mounted) return;
+
+    if (token != null) {
+      // Navigate to Dashboard if the token is available
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DashboardScreen(token: token,userID: userID.toString(),),
+          ),
+      );
+    }
+  }
+
   void _login() async {
+    String randomString = generateRandomString(10);
+    await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,randomString);
+    await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,'12asdqw');
+    Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DashboardScreen(token: randomString,userID: '12asdqw',),
+          ),
+    );
+    
     if (_formKey.currentState!.validate()) {
       String emailOrMobile = emailOrMobileController.text.trim();
       String password = passwordController.text.trim();
@@ -89,11 +124,9 @@ class _LoginScreenState extends State<LoginScreen> {
           await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,generateRandomString(6));
           await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,emailOrMobile);
           if (!mounted) return;
-          // context.go('/dashboard', extra: response['token']);
-          //  context.go('/dashboard', extra: {'token': response['token']});
           if(emailOrMobile=='test@user.com' && password == 'test123') {
-            String randomString = generateRandomString(10);
-            context.go('/dashboard', extra: {'token': randomString, 'userID': emailOrMobile});
+            // String randomString = generateRandomString(10);
+            // context.go('/dashboard', extra: {'token': randomString, 'userID': emailOrMobile});
           } else {
             throw Exception("Error : Invalid Credentials");
           }
@@ -175,13 +208,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 8),
                   TextButton(
                     onPressed: () {
-                      context.go('/forgot_password');
+                      // context.go('/forgot_password');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ForgotPasswordScreen(),
+                          ),
+                      );
                     },
                     child: const Text('Forgot password?'),
                   ),
                   TextButton(
                     onPressed: () {
-                      context.go('/signup');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUpScreen(),
+                          ),
+                      );
                     },
                     child: const Text('Don\'t have an account? Sign Up'),
                   ),

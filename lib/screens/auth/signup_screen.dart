@@ -168,7 +168,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 12),
                 TextButton(
                   onPressed: () {
-                    context.go("/");
+                    Navigator.of(context).popUntil(ModalRoute.withName("/"));
                   },
                   child: const Text('Already have an account? Login'),
                 ),

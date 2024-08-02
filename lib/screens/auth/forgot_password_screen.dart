@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mycomplex_ui/colors.dart';
+import 'package:mycomplex_ui/screens/auth/otp_verification_screen.dart';
 import '../../widgets/custom_text_field.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -57,7 +58,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  isEmail ? 'Enter your email to reset password' : 'Enter your phone number to reset password',
+                  isEmail ? 'Enter email to reset password' : 'Enter phone number to reset password',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -95,7 +96,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // Add forgot password logic here
-                      context.go('/otp_verification', extra: {'isEmail': isEmail, 'contact': emailOrPhoneController.text});
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => OtpVerificationScreen(
+                            isEmail: isEmail,
+                            contact: emailOrPhoneController.text,
+                          ),
+                        ),
+                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -107,7 +116,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 const SizedBox(height: 8),
                 TextButton(
                   onPressed: () {
-                    context.go('/login');
+                    Navigator.pop(context);
                   },
                   child: const Text('Back to Login'),
                 ),

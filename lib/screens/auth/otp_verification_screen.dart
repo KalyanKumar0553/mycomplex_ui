@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mycomplex_ui/colors.dart';
+import 'package:mycomplex_ui/screens/dashboard/dashboard_screen.dart';
 import 'package:mycomplex_ui/services/auth_service.dart';
 import 'package:mycomplex_ui/widgets/custom_toast_msg.dart';
 import '../../widgets/custom_text_field.dart';
@@ -65,7 +66,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> with Code
         _showCustomToast(response['message'] ?? 'OTP verified successfully', ToastStatus.success, icon: Icons.check_circle);
 
         if (mounted) {
-          context.go('/dashboard', extra: {'token': response['token'], 'userID': response['userID'],});
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardScreen(token: response['token'], userID: response['userID'])));
         }
       } catch (e) {
         print('Error: $e');  // Print error to console
@@ -130,7 +131,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> with Code
                 const SizedBox(height: 8),
                 TextButton(
                   onPressed: () {
-                    context.go('/login');
+                    Navigator.of(context).popUntil(ModalRoute.withName("/login"));
                   },
                   child: const Text('Back to Login'),
                 ),

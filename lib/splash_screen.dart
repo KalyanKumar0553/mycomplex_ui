@@ -29,10 +29,20 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (token != null) {
       // Navigate to Dashboard if the token is available
-      context.go('/dashboard', extra: {'token': token, 'userID': userID});
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DashboardScreen(token: token,userID: userID.toString(),),
+          ),
+      );
     } else {
       // Navigate to Login if the token is not available
-      context.go('/login');
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
+          ),
+      );
     }
   }
 

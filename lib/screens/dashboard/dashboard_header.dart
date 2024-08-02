@@ -56,7 +56,7 @@ class DashboardHeader extends StatelessWidget {
                 onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SearchScreen()),
+                  MaterialPageRoute(builder: (context) => SearchScreen(selectedApartmentID: selectedApartmentID)),
                 );
               },
               ),

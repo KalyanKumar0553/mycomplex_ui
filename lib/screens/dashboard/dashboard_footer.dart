@@ -26,20 +26,20 @@ class _DashboardFooterState extends State<DashboardFooter> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.home, color: widget.selectedIndex == 0 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 0 ? 35 : 30,),
+              icon: Icon(Icons.home, color: widget.selectedIndex == 0 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 0 ? 30 : 25,),
               onPressed: () => widget.onItemTapped(0),
             ),
             IconButton(
-              icon: Icon(Icons.apartment, color: widget.selectedIndex == 1 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 1 ? 35 : 30,),
+              icon: Icon(Icons.apartment, color: widget.selectedIndex == 1 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 1 ? 30 : 25,),
               onPressed: () => widget.onItemTapped(1),
             ),
             const SizedBox(width: 40), // The gap for the floating action button
             IconButton(
-              icon: Icon(Icons.notifications, color: widget.selectedIndex == 2 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 2 ? 35 : 30,),
+              icon: Icon(Icons.notifications, color: widget.selectedIndex == 2 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 2 ? 30 : 25,),
               onPressed: () => widget.onItemTapped(2),
             ),
             IconButton(
-              icon: Icon(Icons.person, color: widget.selectedIndex == 3 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 3 ? 35 : 35,),
+              icon: Icon(Icons.person, color: widget.selectedIndex == 3 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 3 ? 30 : 25,),
               onPressed: () => widget.onItemTapped(3),
             ),
           ],
