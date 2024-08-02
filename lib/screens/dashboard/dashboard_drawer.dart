@@ -30,7 +30,7 @@ class _DashboardDrawerState extends State<DashboardDrawer> {
             accountName: Text('Demo User'),
             accountEmail: Text('something@gmail.com'),
             currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.white,
+              backgroundColor: AppColors.background,
               child: Text(
                 "AV",
                 style: TextStyle(fontSize: 40.0),

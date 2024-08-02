@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:mycomplex_ui/screens/daily_help/daily_help_category_screen.dart';
 import 'dart:convert';
 import '../../colors.dart';
@@ -64,11 +63,11 @@ class _DailyHelpScreenState extends State<DailyHelpScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        iconTheme: const IconThemeData(color: AppColors.onPrimary),
-        title: const Text('Daily Help', style: TextStyle(color: AppColors.onPrimary)),
+        iconTheme: const IconThemeData(color: AppColors.background),
+        title: const Text('Daily Help', style: TextStyle(color: AppColors.background)),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search, color: AppColors.onPrimary),
+            icon: const Icon(Icons.search, color: AppColors.background),
             onPressed: () {
               // Implement search functionality if needed
             },

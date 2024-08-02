@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: AppColors.primary,
           secondary: AppColors.primary,
-          onPrimary: AppColors.onPrimary,
+          background: AppColors.background,
         ),
         scaffoldBackgroundColor: AppColors.background,
         inputDecorationTheme: InputDecorationTheme(
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            foregroundColor: AppColors.onPrimary, backgroundColor: AppColors.primary,
+            foregroundColor: AppColors.background, backgroundColor: AppColors.primary,
           ),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(

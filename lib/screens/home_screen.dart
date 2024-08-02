@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mycomplex_ui/colors.dart';
 
 class HomeScreen extends StatelessWidget {
   final String selectedApartmentID;

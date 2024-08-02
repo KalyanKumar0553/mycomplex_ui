@@ -9,7 +9,6 @@ import 'package:mycomplex_ui/screens/dashboard/dashboard_screen.dart';
 import 'package:mycomplex_ui/widgets/custom_toast_msg.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../colors.dart';
-import 'package:go_router/go_router.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../services/auth_service.dart';
 
@@ -200,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ElevatedButton(
                     onPressed: _login,
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: AppColors.onPrimary, backgroundColor: AppColors.primary, // foreground (text) color
+                      foregroundColor: AppColors.background, backgroundColor: AppColors.primary, // foreground (text) color
                       minimumSize: const Size(double.infinity, 50), // full-width button
                     ),
                     child: const Text('Login'),

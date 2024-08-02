@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mycomplex_ui/colors.dart';
 import 'package:mycomplex_ui/screens/dashboard/dashboard_screen.dart';
 import 'package:mycomplex_ui/services/auth_service.dart';
@@ -89,7 +88,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> with Code
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       body: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child:  Padding(
@@ -122,7 +121,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> with Code
                 ElevatedButton(
                   onPressed: _verifyOtp,
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: AppColors.onPrimary, 
+                    foregroundColor: AppColors.background, 
                     backgroundColor: AppColors.primary, // foreground (text) color
                     minimumSize: const Size(double.infinity, 50), // full-width button
                   ),
@@ -131,7 +130,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> with Code
                 const SizedBox(height: 8),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).popUntil(ModalRoute.withName("/login"));
+                    int count = 0;
+                    Navigator.of(context).popUntil((_) => count++ >= 2);
                   },
                   child: const Text('Back to Login'),
                 ),

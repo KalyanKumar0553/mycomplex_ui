@@ -1,19 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mycomplex_ui/constants.dart';
 import 'package:mycomplex_ui/helper/shared_preferences_helper.dart';
 import 'package:mycomplex_ui/screens/dashboard/dashboard_drawer.dart';
-import 'package:mycomplex_ui/screens/side_nav/activity_screen.dart';
 import 'package:mycomplex_ui/screens/dashboard/dashboard_footer.dart';
-import 'package:mycomplex_ui/screens/home_screen.dart';
-import 'package:mycomplex_ui/screens/side_nav/my_unit_screen.dart';
-import 'package:mycomplex_ui/screens/side_nav/notes_screen.dart';
-import 'package:mycomplex_ui/screens/side_nav/profile_screen.dart';
 import 'package:mycomplex_ui/services/dashboard_service.dart';
 import 'package:mycomplex_ui/screens/dashboard/dashboard_header.dart';
 import '../../colors.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class DashboardScreen extends StatefulWidget {
   
@@ -87,7 +79,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 onApartmentChanged: _onApartmentChanged,
         ),
         backgroundColor: AppColors.primary,
-        iconTheme: const IconThemeData(color: AppColors.onPrimary)
+        iconTheme: const IconThemeData(color: AppColors.background)
       ),
       drawer: DashboardDrawer(
                 selectedApartmentID: _selectedApartmentID,

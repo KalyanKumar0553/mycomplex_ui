@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color primary = Color(0xFFAD5472);
-  static const Color onPrimary = Colors.white;
   static const Color background = Colors.white;
   static const Color inputFillColor = Color(0xFFE0E0E0); // Light grey color
   static const Color inputLabelColor = Color.fromARGB(255, 121, 29, 29); // Medium grey color
@@ -20,4 +19,5 @@ class AppColors {
   static const Color attendanceColor = Color.fromARGB(255, 99, 124, 224);
   static const Color calendarBGColor = Color.fromRGBO(224, 224, 224, 1);
   static const transparent=Colors.transparent; // Border color
+  static const Color buttonColors = Colors.yellow;
 }

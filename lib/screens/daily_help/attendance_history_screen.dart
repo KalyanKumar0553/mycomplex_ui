@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mycomplex_ui/colors.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:http/http.dart' as http;
 
 const mockJsonResponse = '''
 [
@@ -142,8 +141,8 @@ CalendarFormat _calendarFormat = CalendarFormat.month;
     return Scaffold(
       appBar:AppBar(
         backgroundColor: AppColors.primary,
-        iconTheme: const IconThemeData(color: AppColors.onPrimary),
-        title: const Text('Attendance History', style: TextStyle(color: AppColors.onPrimary)),
+        iconTheme: const IconThemeData(color: AppColors.background),
+        title: const Text('Attendance History', style: TextStyle(color: AppColors.background)),
       ),
       body: Column(
         children: [
@@ -152,11 +151,11 @@ CalendarFormat _calendarFormat = CalendarFormat.month;
             calendarStyle: const CalendarStyle(cellPadding: EdgeInsets.all(4),tablePadding: EdgeInsets.all(4)),
             headerStyle: const HeaderStyle(
               titleCentered: true,
-              titleTextStyle: TextStyle(color: AppColors.onPrimary, fontSize: 20.0,),
-              decoration: BoxDecoration(color: AppColors.primary,borderRadius: BorderRadius.only(topLeft: Radius.circular(0),topRight: Radius.circular(10))),
+              titleTextStyle: TextStyle(color: AppColors.background, fontSize: 20.0,),
+              decoration: BoxDecoration(color: AppColors.primary,borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10))),
               formatButtonVisible: false,
-              leftChevronIcon: Icon(Icons.chevron_left,color: AppColors.onPrimary,size: 28,),
-              rightChevronIcon: Icon(Icons.chevron_right,color: AppColors.onPrimary,size: 28,),
+              leftChevronIcon: Icon(Icons.chevron_left,color: AppColors.background,size: 28,),
+              rightChevronIcon: Icon(Icons.chevron_right,color: AppColors.background,size: 28,),
             ),
             focusedDay: _focusedDay,
             firstDay: _firstAvailableDay,
@@ -185,7 +184,7 @@ CalendarFormat _calendarFormat = CalendarFormat.month;
               defaultBuilder: (context, day, focusedDay) {
                 return Container(
                   decoration: const BoxDecoration(
-                    color: AppColors.onPrimary,
+                    color: AppColors.background,
                     shape: BoxShape.circle,
                   ),
                   child: Center(
@@ -198,8 +197,8 @@ CalendarFormat _calendarFormat = CalendarFormat.month;
               },
               disabledBuilder: (context, day, focusedDay) {
                 return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                  decoration: const BoxDecoration(
+                    color: AppColors.background,
                     shape: BoxShape.circle,
                   ),
                   child: Center(

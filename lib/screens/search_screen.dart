@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:mycomplex_ui/screens/daily_help/daily_help_screen.dart';
 import 'dart:convert';
 import '../colors.dart';
@@ -98,7 +97,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        iconTheme: const IconThemeData(color: AppColors.onPrimary),
+        iconTheme: const IconThemeData(color: AppColors.background),
         title: Container(
           decoration: BoxDecoration(
             color: AppColors.primary,
@@ -108,12 +107,12 @@ class _SearchScreenState extends State<SearchScreen> {
           child: const TextField(
             decoration: InputDecoration(
               hintText: 'What are you looking for?',
-              hintStyle: TextStyle(color: AppColors.onPrimary),
+              hintStyle: TextStyle(color: AppColors.background),
               border: InputBorder.none,
               fillColor: AppColors.primary,
               filled: true
             ),
-            style: TextStyle(color: AppColors.onPrimary),
+            style: TextStyle(color: AppColors.background),
           ),
         ),
       ),
@@ -160,7 +159,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         }
                       },
                     );
-                  }).toList(),
+                  }),
                 ],
               ),
             ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:mycomplex_ui/screens/daily_help/maid_profile_screen.dart';
 import 'dart:convert';
 import '../../colors.dart';
@@ -110,11 +109,11 @@ class _DailyHelpCategoryScreenState extends State<DailyHelpCategoryScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        iconTheme: const IconThemeData(color: AppColors.onPrimary),
-        title: Text(widget.category['name'], style: const TextStyle(color: AppColors.onPrimary, overflow: TextOverflow.ellipsis)),
+        iconTheme: const IconThemeData(color: AppColors.background),
+        title: Text(widget.category['name'], style: const TextStyle(color: AppColors.background, overflow: TextOverflow.ellipsis)),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search, color: AppColors.onPrimary),
+            icon: const Icon(Icons.search, color: AppColors.background),
             onPressed: () {
               // Implement search functionality if needed
             },
@@ -139,9 +138,9 @@ class _DailyHelpCategoryScreenState extends State<DailyHelpCategoryScreen> {
                         ),
                         child: DropdownButton<String>(
                           value: selectedTimeSlot,
-                          hint: const Text('Free Time Slots', style: TextStyle(color: AppColors.onPrimary, overflow: TextOverflow.ellipsis)),
+                          hint: const Text('Free Time Slots', style: TextStyle(color: AppColors.background, overflow: TextOverflow.ellipsis)),
                           dropdownColor: AppColors.primary,
-                          icon: const Icon(Icons.arrow_drop_down, color: AppColors.onPrimary),
+                          icon: const Icon(Icons.arrow_drop_down, color: AppColors.background),
                           underline: Container(),
                           onChanged: (String? newValue) {
                             setState(() {
@@ -153,7 +152,7 @@ class _DailyHelpCategoryScreenState extends State<DailyHelpCategoryScreen> {
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value, style: const TextStyle(color: AppColors.onPrimary)),
+                              child: Text(value, style: const TextStyle(color: AppColors.background)),
                             );
                           }).toList(),
                         ),
@@ -191,7 +190,7 @@ class _DailyHelpCategoryScreenState extends State<DailyHelpCategoryScreen> {
                             radius: 30,
                             child: Text(
                               filteredWorkers[index]['name'].toString().substring(0,2),
-                              style: const TextStyle(fontSize: 20.0,color: AppColors.onPrimary),
+                              style: const TextStyle(fontSize: 20.0,color: AppColors.background),
                             ),
                           ),
                           title: Row(
@@ -214,7 +213,7 @@ class _DailyHelpCategoryScreenState extends State<DailyHelpCategoryScreen> {
                                   ),
                                   child: const Text(
                                     'INSIDE',
-                                    style: TextStyle(color: AppColors.onPrimary, fontSize: 12),
+                                    style: TextStyle(color: AppColors.background, fontSize: 12),
                                   ),
                                 ),
                               Row(

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:mycomplex_ui/screens/side_nav/activity_screen.dart';
-import 'dart:convert';
 
 import 'package:mycomplex_ui/screens/home_screen.dart';
 import 'package:mycomplex_ui/screens/side_nav/my_unit_screen.dart';

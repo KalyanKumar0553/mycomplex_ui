@@ -29,8 +29,8 @@ class MaidProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        iconTheme: const IconThemeData(color: AppColors.onPrimary),
-        title: const Text('Maid Profile', style: TextStyle(color: AppColors.onPrimary)),
+        iconTheme: const IconThemeData(color: AppColors.background),
+        title: const Text('Maid Profile', style: TextStyle(color: AppColors.background)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -51,7 +51,7 @@ class MaidProfileScreen extends StatelessWidget {
                                       radius: 30,
                                       child: Text(
                                         maidDetails['name'].toString().substring(0,2),
-                                        style: const TextStyle(fontSize: 20.0,color: AppColors.onPrimary),
+                                        style: const TextStyle(fontSize: 20.0,color: AppColors.background),
                                       ),
                                     ),
                       const SizedBox(width: 16),
@@ -64,12 +64,12 @@ class MaidProfileScreen extends StatelessWidget {
                           ),
                           Text(
                             maidDetails['phone'],
-                            style: const TextStyle(color: Colors.grey),
+                            style: const TextStyle(color: AppColors.textColor),
                           ),
                           Row(
                             children: [
                               IconButton(
-                                icon: const Icon(Icons.phone, color: Colors.green),
+                                icon: const Icon(Icons.phone, color: AppColors.success),
                                 onPressed: () {
                                   // Implement call functionality
                                 },
@@ -168,7 +168,7 @@ class MaidProfileScreen extends StatelessWidget {
                       SizedBox(height: 8),
                       Row(
                         children: [
-                          Icon(Icons.phone, color: Colors.green),
+                          Icon(Icons.phone, color: AppColors.success),
                           SizedBox(width: 8),
                           Text('Block-B 1004',style: TextStyle(color:AppColors.textColor)),
                           Spacer(),
@@ -185,7 +185,7 @@ class MaidProfileScreen extends StatelessWidget {
                   _showAddDailyHelpDialog(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black, backgroundColor: Colors.yellow,
+                  foregroundColor: AppColors.textColor, backgroundColor: AppColors.buttonColors,
                   padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 ),
                 child: const Text('+ Add to Household'),

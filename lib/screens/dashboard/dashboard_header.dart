@@ -35,16 +35,16 @@ class DashboardHeader extends StatelessWidget {
                           color: AppColors.primary,
                           child: Text(
                             value['name']!,
-                            selectionColor: AppColors.onPrimary,
-                            style: const TextStyle(color: AppColors.onPrimary, backgroundColor: AppColors.primary),
+                            selectionColor: AppColors.background,
+                            style: const TextStyle(color: AppColors.background, backgroundColor: AppColors.primary),
                           ),
                         ),      
                       );
                     }).toList(),
                    underline: Container(),
-                icon: const Icon(Icons.arrow_drop_down, color: AppColors.onPrimary),
+                icon: const Icon(Icons.arrow_drop_down, color: AppColors.background),
                 dropdownColor: AppColors.primary,
-                style: const TextStyle(color: AppColors.onPrimary),
+                style: const TextStyle(color: AppColors.background),
               ),
             ],
           ),
@@ -52,7 +52,7 @@ class DashboardHeader extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 icon: const Icon(Icons.search),
-                color: AppColors.onPrimary,
+                color: AppColors.background,
                 onPressed: () {
                 Navigator.push(
                   context,
@@ -62,14 +62,14 @@ class DashboardHeader extends StatelessWidget {
               ),
               IconButton(
                 icon: const Icon(Icons.notifications),
-                color: AppColors.onPrimary,
+                color: AppColors.background,
                 onPressed: () {
                   // Handle notifications action
                 },
               ),
               IconButton(
                 icon: const Icon(Icons.message),
-                color: AppColors.onPrimary,
+                color: AppColors.background,
                 onPressed: () {
                   // Handle message action
                 },

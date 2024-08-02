@@ -157,7 +157,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ElevatedButton(
                   onPressed: _signUp,
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: AppColors.onPrimary,
+                    foregroundColor: AppColors.background,
                     backgroundColor: AppColors.primary,
                     minimumSize: const Size(double.infinity, 50), // full-width button
                   ),
@@ -168,7 +168,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 12),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).popUntil(ModalRoute.withName("/"));
+                    Navigator.pop(context);
                   },
                   child: const Text('Already have an account? Login'),
                 ),

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import '../../colors.dart';
 
 class AddDailyHelpDialog extends StatelessWidget {
-  const AddDailyHelpDialog({Key? key}) : super(key: key);
+  const AddDailyHelpDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: AppColors.onPrimary,
+      backgroundColor: AppColors.background,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -22,6 +22,7 @@ class AddDailyHelpDialog extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
+                color: AppColors.textColor
               ),
             ),
           ),
@@ -30,10 +31,11 @@ class AddDailyHelpDialog extends StatelessWidget {
             child: Text(
               'Please ensure that you have spoken to him/her before adding this person to the flat.',
               textAlign: TextAlign.center,
+              style: TextStyle(color:AppColors.textColor),
             ),
           ),
           const SizedBox(height: 16),
-          const Divider(height: 1, color: Colors.grey),
+          const Divider(height: 1, color: AppColors.textColor),
           Row(
             children: <Widget>[
               Expanded(
@@ -41,27 +43,30 @@ class AddDailyHelpDialog extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Cancel'),
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.black,
+                    foregroundColor: AppColors.textColor,
                   ),
+                  child: const Text('Cancel'),
                 ),
               ),
-              Container(
+              const SizedBox(
                 height: 50,
-                child: const VerticalDivider(
+                child: VerticalDivider(
                   width: 1,
-                  color: Colors.grey,
+                  color: AppColors.textColor,
                 ),
               ),
               Expanded(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow, // background (button) color
-                    foregroundColor: Colors.black, // text (button) color
+                    backgroundColor: AppColors.buttonColors,
+                    foregroundColor: AppColors.textColor,
+                    minimumSize: const Size.fromHeight(50),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(bottomRight: Radius.circular(10)),
+                    ),
                   ),
                   onPressed: () {
-                    // Add your logic here
                     Navigator.of(context).pop();
                   },
                   child: const Text('Add'),

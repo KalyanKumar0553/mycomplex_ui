@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mycomplex_ui/colors.dart';
 import 'package:mycomplex_ui/screens/auth/otp_verification_screen.dart';
 import '../../widgets/custom_text_field.dart';
@@ -42,7 +41,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Padding(
@@ -108,7 +107,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white, backgroundColor: AppColors.primary, // foreground (text) color
+                    foregroundColor: AppColors.background, backgroundColor: AppColors.primary, // foreground (text) color
                     minimumSize: const Size(double.infinity, 50), // full-width button
                   ),
                   child: const Text('Reset Password'),
