@@ -100,15 +100,15 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _login() async {
-    String randomString = generateRandomString(10);
-    await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,randomString);
-    await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,'12asdqw');
-    Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DashboardScreen(token: randomString,userID: '12asdqw',),
-          ),
-    );
+    // String randomString = generateRandomString(10);
+    // await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,randomString);
+    // await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,'12asdqw');
+    // Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //         builder: (context) => DashboardScreen(token: randomString,userID: '12asdqw',),
+    //       ),
+    // );
     
     if (_formKey.currentState!.validate()) {
       String emailOrMobile = emailOrMobileController.text.trim();
@@ -123,9 +123,14 @@ class _LoginScreenState extends State<LoginScreen> {
           await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,generateRandomString(6));
           await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,emailOrMobile);
           if (!mounted) return;
-          if(emailOrMobile=='test@user.com' && password == 'test123') {
-            // String randomString = generateRandomString(10);
-            // context.go('/dashboard', extra: {'token': randomString, 'userID': emailOrMobile});
+          if(emailOrMobile=='test@user.com' && password == 'test1234') {
+              String randomString = generateRandomString(10);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DashboardScreen(token: randomString,userID: emailOrMobile,),
+                  ),
+              );
           } else {
             throw Exception("Error : Invalid Credentials");
           }

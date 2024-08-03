@@ -24,7 +24,7 @@ class ContactDetailsTab extends StatelessWidget {
             CustomTextField(
                 labelText: 'Email',
                 controller: emailController,
-                isPassword: true,
+                isPassword: false,
                 helperText: 'Enter your Email',
             ),
             const SizedBox(height: 16),

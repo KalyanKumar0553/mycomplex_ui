@@ -8,9 +8,9 @@ import 'package:http/http.dart' as http; // For making HTTP requests
 
 const mockJsonResponse = '''
     {
-      "name": "Kalyan Kunar",
-      "email": "kalyankumar0553@gmail.com",
-      "phone": "+91 - 7396402220",
+      "name": "Test User",
+      "email": "test@user.com",
+      "phone": "+91-1234567890",
       "imageUrl":""
     }
   ''';
@@ -58,9 +58,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // Mock JSON response
     final mockJsonResponse = '''
     {
-      "name": "Kalyan Kunar",
-      "email": "kalyankumar0553@gmail.com",
-      "phone": "+91 - 7396402220",
+      "name": "Test User",
+      "email": "test@user.co,",
+      "phone": "+91-1234567890",
       "imageUrl":""
     }
     ''';

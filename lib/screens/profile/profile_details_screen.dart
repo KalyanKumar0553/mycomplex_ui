@@ -94,13 +94,21 @@ class _DetailedProfileState extends State<DetailedProfile> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleAvatar(
-              backgroundColor: AppColors.primary,
-              radius: 30,
-              child: Text(
-                (profileData?['name'] ?? 'N/A').toString().substring(0, 1),
-                style: const TextStyle(fontSize: 20.0, color: AppColors.background),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                    (profileData?['imageUrl']??"")!="" ? CircleAvatar(
+                            backgroundImage: NetworkImage(profileData?['imageUrl']),
+                            radius: 30,
+                    ) : CircleAvatar(
+                      backgroundColor: AppColors.primary,
+                        radius: 30,
+                        child: Text(
+                          (profileData?['name'] ?? 'N/A').toString().substring(0, 1),
+                          style: const TextStyle(fontSize: 20.0,color: AppColors.background),
+                        ),
+                    ),
+              ]
             ),
             const SizedBox(height: 8),
             Text(

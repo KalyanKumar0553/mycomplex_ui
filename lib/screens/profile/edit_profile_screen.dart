@@ -72,11 +72,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> with SingleTicker
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         iconTheme: const IconThemeData(color: AppColors.background),
-        title: const Text('Daily Help', style: TextStyle(color: AppColors.background)),
+        title: const Text('Edit Profile', style: TextStyle(color: AppColors.background)),
+        centerTitle: true,
         bottom: TabBar(
           controller: _tabController,
           labelColor: AppColors.background,
-          labelStyle: TextStyle(fontWeight: FontWeight.bold),
+          labelStyle: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 2),
           unselectedLabelColor: AppColors.background,
           unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
           tabs: const [

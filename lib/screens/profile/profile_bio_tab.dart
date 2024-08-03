@@ -26,6 +26,16 @@ class ProfileBioTab extends StatefulWidget {
 }
 
 class _ProfileBioTabState extends State<ProfileBioTab> {
+
+  String? _selectedGender;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedGender = widget.genderController.text ?? '';
+  }
+
+
   Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
     DateTime? selectedDate = await showDatePicker(
       context: context,
@@ -53,10 +63,46 @@ class _ProfileBioTabState extends State<ProfileBioTab> {
                 isPassword: false,
             ),
             const SizedBox(height: 4),
-            CustomTextField(
-                labelText: 'Gender ',
-                controller: widget.genderController,
-                isPassword: false,
+            Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Theme(             
+                  data: Theme.of(context).copyWith(
+                    colorScheme: ColorScheme.light(primary: AppColors.primary),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    value: _selectedGender,
+                    dropdownColor: AppColors.textColor,
+                    decoration: InputDecoration(
+                      labelStyle: const TextStyle(color: AppColors.inputLabelColor),
+                      filled: true,
+                      fillColor: AppColors.inputFillColor,
+                      border: UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      labelText: 'Gender',
+                    ),
+                    items: const [
+                      DropdownMenuItem(value: '', child: Text('Please Select Gender',style: TextStyle(color:AppColors.textColor),)),
+                      DropdownMenuItem(value: 'Male', child: Text('Male',style: TextStyle(color:AppColors.textColor),)),
+                      DropdownMenuItem(value: 'Female', child: Text('Female',style: TextStyle(color:AppColors.textColor),)),
+                    ],
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedGender = newValue;
+                        widget.genderController.text = newValue!;
+                      });
+                    },
+                  ),
+                ),
             ),
             const SizedBox(height: 4),
             Padding(
@@ -65,19 +111,22 @@ class _ProfileBioTabState extends State<ProfileBioTab> {
                 controller: widget.dobController,
                   decoration: InputDecoration(
                     labelText: 'Date of Birth',
+                    filled: true,
+                    fillColor: AppColors.inputFillColor,
                     suffixIcon: Icon(Icons.calendar_today),
+                    labelStyle: const TextStyle(color: AppColors.inputLabelColor),
                     border: UnderlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide.none,
-                  ),
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide.none,
+                    ),
                 ),
                 readOnly: true,
                 onTap: () => _selectDate(context, widget.dobController),
@@ -89,8 +138,11 @@ class _ProfileBioTabState extends State<ProfileBioTab> {
               child:TextField(
                 controller: widget.anniversaryController,
                   decoration: InputDecoration(
+                    filled: true,
+                    fillColor: AppColors.inputFillColor,
                     labelText: 'Anniversary Date',
                     suffixIcon: Icon(Icons.calendar_today),
+                    labelStyle: const TextStyle(color: AppColors.inputLabelColor),
                     border: UnderlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide.none,
