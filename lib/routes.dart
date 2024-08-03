@@ -13,31 +13,31 @@ final GoRouter router = GoRouter(
       path: '/',
       builder: (context, state) => const SplashScreen(),
     ),
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const LoginScreen(),
-    ),
-    GoRoute(
-      path: '/signup',
-      builder: (context, state) => const SignUpScreen(),
-    ),
-    GoRoute(
-      path: '/dashboard',
-      builder: (context, state) {
-        final Map<String, dynamic> args = state.extra as Map<String, dynamic>;
-        return DashboardScreen(token: args['token'], userID:args['userID']);
-      },
-    ),
-    GoRoute(
-      path: '/forgot_password',
-      builder: (context, state) => const ForgotPasswordScreen(),
-    ),
-    GoRoute(
-      path: '/otp_verification',
-      builder: (context, state) {
-        final Map<String, dynamic> args = state.extra as Map<String, dynamic>;
-        return OtpVerificationScreen(isEmail: args['isEmail'], contact: args['contact']);
-      },
-    ),
+    // GoRoute(
+    //   path: '/login',
+    //   builder: (context, state) => const LoginScreen(),
+    // ),
+    // GoRoute(
+    //   path: '/signup',
+    //   builder: (context, state) => const SignUpScreen(),
+    // ),
+    // GoRoute(
+    //   path: '/dashboard',
+    //   builder: (context, state) {
+    //     final Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+    //     return DashboardScreen(token: args['token'], userID:args['userID']);
+    //   },
+    // ),
+    // GoRoute(
+    //   path: '/forgot_password',
+    //   builder: (context, state) => const ForgotPasswordScreen(),
+    // ),
+    // GoRoute(
+    //   path: '/otp_verification',
+    //   builder: (context, state) {
+    //     final Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+    //     return OtpVerificationScreen(isEmail: args['isEmail'], contact: args['contact']);
+    //   },
+    // ),
   ],
 );

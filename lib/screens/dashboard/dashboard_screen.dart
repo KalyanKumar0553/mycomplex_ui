@@ -28,7 +28,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   
   @override
   void initState() {
-    _dashboardService = DashboardService(token: widget.token, userId: widget.userID);
+    _dashboardService = DashboardService(token: widget.token,userID:widget.userID);
     super.initState();
     _fetchApartments();
   }
@@ -63,8 +63,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       setState(() {
         _selectedApartmentID = newValue;
       });
-
-      // Save the new selected apartment to shared preferences
       await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.selectedApartmentID, newValue);
     }
   }

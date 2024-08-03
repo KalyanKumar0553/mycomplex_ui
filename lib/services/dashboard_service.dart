@@ -8,9 +8,9 @@ import 'package:mycomplex_ui/screens/side_nav/profile_screen.dart';
 
 class DashboardService {
   final String token;
-  final String userId;
+  final String userID;
 
-  DashboardService({required this.token, required this.userId});
+  DashboardService({required this.token, required this.userID});
 
   Future<List<Map<String, String>>> fetchApartments() async {
     // final response = await http.get(
@@ -35,17 +35,17 @@ class DashboardService {
   Widget getWidgetOption(int index,String selectedApartmentID) {
     switch (index) {
       case 0:
-        return HomeScreen(selectedApartmentID: selectedApartmentID);
+        return HomeScreen(selectedApartmentID: selectedApartmentID,userID: userID,);
       case 1:
         return const MyUnitScreen();
       case 2:
         return const ActivityScreen();
       case 3:
-        return const ProfileScreen();
+        return ProfileScreen(selectedApartmentID: selectedApartmentID,userID: userID,);
       case 4:
         return const NotesScreen();
       default:
-        return HomeScreen(selectedApartmentID: selectedApartmentID);
+        return HomeScreen(selectedApartmentID: selectedApartmentID,userID: userID,);
     }
   }
 
