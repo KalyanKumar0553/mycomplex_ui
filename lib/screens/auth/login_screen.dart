@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mycomplex_ui/constants.dart';
 import 'package:mycomplex_ui/helper/shared_preferences_helper.dart';
 import 'package:mycomplex_ui/screens/auth/forgot_password_screen.dart';
@@ -100,9 +101,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _login() async {
-    // String randomString = generateRandomString(10);
-    // await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,randomString);
-    // await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,'12asdqw');
+    String randomString = generateRandomString(10);
+    await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,randomString);
+    await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,'12asdqw');
+    if (!mounted) return;
+    context.go('/dashboard', extra: {'token': randomString, 'userID': '12asdqw'});    
     // Navigator.push(
     //       context,
     //       MaterialPageRoute(
@@ -110,36 +113,36 @@ class _LoginScreenState extends State<LoginScreen> {
     //       ),
     // );
     
-    if (_formKey.currentState!.validate()) {
-      String emailOrMobile = emailOrMobileController.text.trim();
-      String password = passwordController.text.trim();
-      Map<String, dynamic> payload = isEmail
-          ? {'email': emailOrMobile, 'password': password}
-          : {'mobile': emailOrMobile, 'password': password};
-      try {
-        // final response = await _authService.login(payload);
-        // _showCustomToast(response['message'] ?? 'Login successful', ToastStatus.success, icon: Icons.check_circle);
-        if (mounted) {
-          await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,generateRandomString(6));
-          await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,emailOrMobile);
-          if (!mounted) return;
-          if(emailOrMobile=='test@user.com' && password == 'test1234') {
-              String randomString = generateRandomString(10);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DashboardScreen(token: randomString,userID: emailOrMobile,),
-                  ),
-              );
-          } else {
-            throw Exception("Error : Invalid Credentials");
-          }
-        }
-      } catch (e) {
-        print('Error: $e');  // Print error to console
-        _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
-      }
-    }
+    // if (_formKey.currentState!.validate()) {
+    //   String emailOrMobile = emailOrMobileController.text.trim();
+    //   String password = passwordController.text.trim();
+    //   Map<String, dynamic> payload = isEmail
+    //       ? {'email': emailOrMobile, 'password': password, 'isEmailSent': isEmail}
+    //       : {'mobile': emailOrMobile, 'password': password, 'isEmailSent': isEmail};
+    //   try {
+    //     final response = await _authService.login(payload);
+    //     _showCustomToast(response['message'] ?? 'Login successful', ToastStatus.success, icon: Icons.check_circle);
+    //     if (mounted) {
+    //       await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,generateRandomString(6));
+    //       await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,emailOrMobile);
+    //       if (!mounted) return;
+    //       if(emailOrMobile=='test@user.com' && password == 'test1234') {
+    //           String randomString = generateRandomString(10);
+    //           Navigator.push(
+    //               context,
+    //               MaterialPageRoute(
+    //                 builder: (context) => DashboardScreen(token: randomString,userID: emailOrMobile,),
+    //               ),
+    //           );
+    //       } else {
+    //         throw Exception("Error : Invalid Credentials");
+    //       }
+    //     }
+    //   } catch (e) {
+    //     print('Error: $e');  // Print error to console
+    //     _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
+    //   }
+    // }
   }
 
   @override

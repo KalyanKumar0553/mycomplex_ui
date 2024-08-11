@@ -22,24 +22,25 @@ class _DashboardFooterState extends State<DashboardFooter> {
         color: AppColors.primary,
         shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
+        height:60,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.home, color: widget.selectedIndex == 0 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 0 ? 30 : 25,),
+              icon: Icon(Icons.home, color: widget.selectedIndex == 0 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 0 ? 25 : 23,),
               onPressed: () => widget.onItemTapped(0),
             ),
             IconButton(
-              icon: Icon(Icons.apartment, color: widget.selectedIndex == 1 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 1 ? 30 : 25,),
+              icon: Icon(Icons.apartment, color: widget.selectedIndex == 1 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 1 ? 25 : 23,),
               onPressed: () => widget.onItemTapped(1),
             ),
             const SizedBox(width: 40), // The gap for the floating action button
             IconButton(
-              icon: Icon(Icons.notifications, color: widget.selectedIndex == 2 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 2 ? 30 : 25,),
+              icon: Icon(Icons.notifications, color: widget.selectedIndex == 2 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 2 ? 25 : 23,),
               onPressed: () => widget.onItemTapped(2),
             ),
             IconButton(
-              icon: Icon(Icons.person, color: widget.selectedIndex == 3 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 3 ? 30 : 25,),
+              icon: Icon(Icons.person, color: widget.selectedIndex == 3 ? AppColors.bottomNavigationButton : Colors.white ,size: widget.selectedIndex == 3 ? 25 : 23,),
               onPressed: () => widget.onItemTapped(3),
             ),
           ],

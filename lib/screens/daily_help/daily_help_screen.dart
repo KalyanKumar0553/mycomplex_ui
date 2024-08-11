@@ -44,9 +44,7 @@ class _DailyHelpScreenState extends State<DailyHelpScreen> {
     ]
     ''';
 
-    
     // final response = await http.get(Uri.parse('https://yourapi.com/api/daily-help'));
-
     // if (response.statusCode == 200) {
       setState(() {
         // dailyHelpDetails = List<Map<String, dynamic>>.from(json.decode(response.body));
@@ -67,9 +65,11 @@ class _DailyHelpScreenState extends State<DailyHelpScreen> {
         title: const Text('Daily Help', style: TextStyle(color: AppColors.background)),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search, color: AppColors.background),
+            icon: const Icon(Icons.home, color: AppColors.background),
+            padding: EdgeInsets.only(right: 10),
             onPressed: () {
-              // Implement search functionality if needed
+              int count = 0;
+              Navigator.of(context).popUntil((_) => count++ >= 2);
             },
           ),
         ],

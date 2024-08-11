@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mycomplex_ui/colors.dart';
+import 'package:mycomplex_ui/screens/auth/otp_verification_screen.dart';
 import 'package:mycomplex_ui/services/auth_service.dart';
 import '../../widgets/custom_text_field.dart';
 import 'package:mycomplex_ui/widgets/custom_toast_msg.dart';
@@ -65,8 +66,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
           : {'mobile': emailOrMobile, 'password': password, 'isEmailSent': isEmail};
       try {
         final response = await _authService.signUp(payload);
-        _showCustomToast(response['message'] ?? 'Sign up successful', ToastStatus.success, icon: Icons.check_circle);
+        _showCustomToast(response['statusMsg'] ?? 'Sign up successful', ToastStatus.success, icon: Icons.check_circle);
         if (mounted) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => OtpVerificationScreen(isEmail:isEmail,contact: emailOrMobile,),
+            ),
+          );
           context.go('/otp_verification');
         }
       } catch (e) {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mycomplex_ui/screens/side_nav/activity_screen.dart';
+import 'package:mycomplex_ui/screens/tabs/activity_screen.dart';
+import 'package:mycomplex_ui/screens/tabs/add_screen.dart';
 
-import 'package:mycomplex_ui/screens/home_screen.dart';
-import 'package:mycomplex_ui/screens/side_nav/my_unit_screen.dart';
-import 'package:mycomplex_ui/screens/side_nav/notes_screen.dart';
-import 'package:mycomplex_ui/screens/side_nav/profile_screen.dart';
+import 'package:mycomplex_ui/screens/tabs/home_screen.dart';
+import 'package:mycomplex_ui/screens/tabs/my_unit_screen.dart';
+import 'package:mycomplex_ui/screens/tabs/profile_screen.dart';
 
 class DashboardService {
   final String token;
@@ -32,20 +32,20 @@ class DashboardService {
     // }
   }
 
-  Widget getWidgetOption(int index,String selectedApartmentID) {
+  Widget getWidgetOption(int index,String selectedApartmentID,List<Map<String, String>> apartments,ValueChanged<String?> onApartmentChanged) {
     switch (index) {
       case 0:
-        return HomeScreen(selectedApartmentID: selectedApartmentID,userID: userID,);
+        return HomeScreen(selectedApartmentID: selectedApartmentID,userID: userID,apartments:apartments,onApartmentChanged:onApartmentChanged);
       case 1:
-        return const MyUnitScreen();
+        return MyUnitScreen(selectedApartmentID: selectedApartmentID,userID: userID,apartments:apartments,onApartmentChanged:onApartmentChanged);
       case 2:
-        return const ActivityScreen();
+        return ActivityScreen(selectedApartmentID: selectedApartmentID,userID: userID,apartments:apartments,onApartmentChanged:onApartmentChanged);
       case 3:
         return ProfileScreen(selectedApartmentID: selectedApartmentID,userID: userID,);
       case 4:
-        return const NotesScreen();
+        return AddScreen(selectedApartmentID: selectedApartmentID,userID: userID,apartments:apartments,onApartmentChanged:onApartmentChanged);
       default:
-        return HomeScreen(selectedApartmentID: selectedApartmentID,userID: userID,);
+        return HomeScreen(selectedApartmentID: selectedApartmentID,userID: userID,apartments:apartments,onApartmentChanged:onApartmentChanged);
     }
   }
 

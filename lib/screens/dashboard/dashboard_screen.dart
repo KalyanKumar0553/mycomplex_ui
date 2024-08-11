@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mycomplex_ui/constants.dart';
 import 'package:mycomplex_ui/helper/shared_preferences_helper.dart';
-import 'package:mycomplex_ui/screens/dashboard/dashboard_drawer.dart';
 import 'package:mycomplex_ui/screens/dashboard/dashboard_footer.dart';
 import 'package:mycomplex_ui/services/dashboard_service.dart';
-import 'package:mycomplex_ui/screens/dashboard/dashboard_header.dart';
 import '../../colors.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -70,25 +68,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: DashboardHeader(
-                selectedApartmentID: _selectedApartmentID,
-                apartments: _apartments,
-                onApartmentChanged: _onApartmentChanged,
-        ),
-        backgroundColor: AppColors.primary,
-        iconTheme: const IconThemeData(color: AppColors.background)
-      ),
-      drawer: DashboardDrawer(
-                selectedApartmentID: _selectedApartmentID,
-                apartments: _apartments,
-                onApartmentChanged: _onApartmentChanged,
-                onItemTapped: _onItemTapped,
-              ),
       body: Column(
         children: <Widget>[
           Expanded(
-            child: _dashboardService.getWidgetOption(_selectedIndex,_selectedApartmentID),
+            child: _dashboardService.getWidgetOption(_selectedIndex,_selectedApartmentID,_apartments,_onApartmentChanged),
           ),
         ],
       ),
@@ -96,7 +79,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       floatingActionButton: FloatingActionButton(
           backgroundColor: AppColors.primary,
           onPressed: () => _onItemTapped(4),
-          child: const Icon(Icons.add, color:  Colors.white ,size: 40),
+          child: const Icon(Icons.add, color:  Colors.white ,size: 30),
       ),
       bottomNavigationBar:DashboardFooter(
         selectedIndex: _selectedIndex,

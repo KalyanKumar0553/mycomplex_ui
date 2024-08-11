@@ -113,9 +113,11 @@ class _DailyHelpCategoryScreenState extends State<DailyHelpCategoryScreen> {
         title: Text(widget.category['name'], style: const TextStyle(color: AppColors.background, overflow: TextOverflow.ellipsis)),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search, color: AppColors.background),
+            icon: const Icon(Icons.home, color: AppColors.background),
+            padding: EdgeInsets.only(right: 10),
             onPressed: () {
-              // Implement search functionality if needed
+              int count = 0;
+              Navigator.of(context).popUntil((_) => count++ >= 3);
             },
           ),
         ],

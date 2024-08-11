@@ -61,15 +61,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> with Code
           : {'mobile': widget.contact, 'otp': otp};
       try {
         final response = await _authService.verifyOtp(payload);
-        print('Response: $response');  // Print response to console
-        _showCustomToast(response['message'] ?? 'OTP verified successfully', ToastStatus.success, icon: Icons.check_circle);
-
+        _showCustomToast(response['message'] ?? 'OTP verified successfully. Please login with credentials.', ToastStatus.success, icon: Icons.check_circle);
         if (mounted) {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardScreen(token: response['token'], userID: response['userID'])));
+          int count = 0;
+          Navigator.of(context).popUntil((_) => count++ >= 2);
         }
       } catch (e) {
         print('Error: $e');  // Print error to console
-        _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
+        _showCustomToast("Error to verify OTP : Please try again", ToastStatus.failure, icon: Icons.error);
       }
     }
     }

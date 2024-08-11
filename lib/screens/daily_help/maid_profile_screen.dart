@@ -27,10 +27,20 @@ class MaidProfileScreen extends StatelessWidget {
     List<int> ratingCounts = [5, 1, 1, 1, 2];
 
     return Scaffold(
-      appBar: AppBar(
+     appBar: AppBar(
         backgroundColor: AppColors.primary,
         iconTheme: const IconThemeData(color: AppColors.background),
         title: const Text('Maid Profile', style: TextStyle(color: AppColors.background)),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.home, color: AppColors.background),
+            padding: EdgeInsets.only(right: 10),
+            onPressed: () {
+              int count = 0;
+              Navigator.of(context).popUntil((_) => count++ >= 4);
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

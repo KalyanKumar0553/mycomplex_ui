@@ -139,10 +139,20 @@ CalendarFormat _calendarFormat = CalendarFormat.month;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
+      appBar: AppBar(
         backgroundColor: AppColors.primary,
         iconTheme: const IconThemeData(color: AppColors.background),
-        title: const Text('Attendance History', style: TextStyle(color: AppColors.background)),
+        title: Text('Attendance History', style: const TextStyle(color: AppColors.background, overflow: TextOverflow.ellipsis)),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.home, color: AppColors.background),
+            padding: EdgeInsets.only(right: 10),
+            onPressed: () {
+              int count = 0;
+              Navigator.of(context).popUntil((_) => count++ >= 5);
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [

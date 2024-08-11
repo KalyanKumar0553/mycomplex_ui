@@ -4,13 +4,18 @@ import 'dart:convert';
 import '../colors.dart';
 
 class SearchScreen extends StatefulWidget {
-  
-  final String selectedApartmentID;
-  const SearchScreen({super.key, required this.selectedApartmentID});
 
+  final String selectedApartmentID;
+  final String userID;
+  final List<Map<String, String>> apartments;
+  final ValueChanged<String?> onApartmentChanged;
+
+  const SearchScreen({super.key, required this.selectedApartmentID, required this.userID,required this.apartments,required this.onApartmentChanged,});
+  
   @override
   // ignore: library_private_types_in_public_api
   _SearchScreenState createState() => _SearchScreenState();
+  
 }
 
 class _SearchScreenState extends State<SearchScreen> {

@@ -7,11 +7,12 @@ class DashboardHeader extends StatelessWidget {
   final String selectedApartmentID;
   List<Map<String, String>> apartments = [];
   final ValueChanged<String?> onApartmentChanged;
-
+  final String userID;
   DashboardHeader({super.key, 
     required this.selectedApartmentID,
     required this.apartments,
     required this.onApartmentChanged,
+    required this.userID
   });
 
   @override
@@ -56,16 +57,9 @@ class DashboardHeader extends StatelessWidget {
                 onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SearchScreen(selectedApartmentID: selectedApartmentID)),
+                  MaterialPageRoute(builder: (context) => SearchScreen(selectedApartmentID: selectedApartmentID,apartments:apartments,onApartmentChanged: onApartmentChanged,userID: "",)),
                 );
               },
-              ),
-              IconButton(
-                icon: const Icon(Icons.notifications),
-                color: AppColors.background,
-                onPressed: () {
-                  // Handle notifications action
-                },
               ),
               IconButton(
                 icon: const Icon(Icons.message),

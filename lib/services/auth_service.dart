@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  static const String signupUrl = '/api/auth/signup';
-  static const String loginUrl = '/api/auth/login';
-  static const String otpVerifyUrl = '/api/auth/verify';
+  static const String signupUrl = 'http://localhost:8080/api/auth/signup';
+  static const String loginUrl = 'http://localhost:8080/api/auth/login';
+  static const String otpVerifyUrl = 'http://localhost:8080/api/auth/verify';
   
   Future<Map<String, dynamic>> signUp(Map<String, dynamic> payload) async {
     final response = await http.post(
@@ -14,11 +14,11 @@ class AuthService {
       },
       body: json.encode(payload),
     );
-
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('Failed to sign up');
+      Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      throw Exception(errorResponse['message']?? 'Failed to sign up : Please Try Again' );
     }
   }
 
@@ -32,9 +32,10 @@ class AuthService {
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      return jsonDecode(response.body)['statusMsg'];
     } else {
-      throw Exception('Failed to login: ${response.body}');
+      Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      throw Exception(errorResponse['message']?? 'Failed to login : Please Try Again' );
     }
   }
 
@@ -50,7 +51,8 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to verify OTP: ${response.body}');
+      Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      throw Exception(errorResponse['message']?? 'Failed to verify OTP : Please Try Again' );
     }
   }
 }
