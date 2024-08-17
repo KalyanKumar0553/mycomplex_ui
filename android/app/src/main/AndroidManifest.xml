@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permision.INTERNET"></uses-permission>
     <application
         android:label="MyComplex"
         android:name="${applicationName}"

@@ -44,6 +44,11 @@ dependencies:
   cupertino_icons: ^1.0.6
   intl: ^0.19.0
   firebase_core: ^3.3.0
+  audioplayers: ^6.0.0
+  webview_flutter: ^4.0.5
+  webview_flutter_web: ^0.2.3+2
+
+
 
 dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
@@ -71,6 +76,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo.png
+    - assets/ringtones/default.mp3
+    - assets/ringtones/carol.mp3
+    - assets/ringtones/crystal.mp3
+    - assets/ringtones/doorbell.mp3
+    - assets/html/privacy.html
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

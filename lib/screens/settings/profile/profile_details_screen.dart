@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:mycomplex_ui/screens/profile/edit_profile_screen.dart';
-import '../../colors.dart';
+import 'package:mycomplex_ui/screens/settings/profile/edit_profile_screen.dart';
+import '../../../colors.dart';
 import 'dart:convert'; // For decoding JSON
 import 'package:http/http.dart' as http;
 

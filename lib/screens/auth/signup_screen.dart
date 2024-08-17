@@ -20,6 +20,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailOrMobileController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
+  bool isSignupRequestInProgress = false;
   final _formKey = GlobalKey<FormState>();
   final AuthService _authService = AuthService();
 
@@ -59,6 +60,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
  void _signUp() async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        isSignupRequestInProgress = true;
+      });
       String emailOrMobile = emailOrMobileController.text.trim();
       String password = passwordController.text.trim();
       Map<String, dynamic> payload = isEmail
@@ -74,10 +78,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
               builder: (context) => OtpVerificationScreen(isEmail:isEmail,contact: emailOrMobile,),
             ),
           );
-          context.go('/otp_verification');
         }
+        setState(() {
+          isSignupRequestInProgress = false;
+        });
       } catch (e) {
         _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
+        setState(() {
+          isSignupRequestInProgress = false;
+        });
       }
     }
   }
@@ -161,6 +170,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   prefixIcon: const Icon(Icons.password),
                 ),
                 const SizedBox(height: 16),
+                isSignupRequestInProgress ? 
+                Column(
+                  children: [
+                    Center(
+                      child: SizedBox(
+                        child: CircularProgressIndicator(color: AppColors.primary,),
+                        height: 20,
+                        width: 20,
+                      ),
+                    )
+                  ],
+                ):
                 ElevatedButton(
                   onPressed: _signUp,
                   style: ElevatedButton.styleFrom(
@@ -171,9 +192,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: const Text('Sign up'),
                 ),
                 const SizedBox(height: 12),
-                const Text('Or'),
+                isSignupRequestInProgress ? Container(height: 0,) : const Text('Or'),
                 const SizedBox(height: 12),
-                TextButton(
+                isSignupRequestInProgress ? Container(height: 0,) : TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },

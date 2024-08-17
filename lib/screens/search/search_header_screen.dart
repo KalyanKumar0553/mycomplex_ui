@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:mycomplex_ui/screens/daily_help/daily_help_screen.dart';
 import 'dart:convert';
-import '../colors.dart';
+import '../../colors.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchHeaderScreen extends StatefulWidget {
 
   final String selectedApartmentID;
   final String userID;
   final List<Map<String, String>> apartments;
   final ValueChanged<String?> onApartmentChanged;
 
-  const SearchScreen({super.key, required this.selectedApartmentID, required this.userID,required this.apartments,required this.onApartmentChanged,});
+  const SearchHeaderScreen({super.key, required this.selectedApartmentID, required this.userID,required this.apartments,required this.onApartmentChanged,});
   
   @override
   // ignore: library_private_types_in_public_api
-  _SearchScreenState createState() => _SearchScreenState();
+  _SearchHeaderScreenState createState() => _SearchHeaderScreenState();
   
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SearchHeaderScreenState extends State<SearchHeaderScreen> {
   List<Map<String, dynamic>> searchOptions = [];
   bool isLoading = true;
 

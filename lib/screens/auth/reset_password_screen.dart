@@ -6,19 +6,22 @@ import 'package:mycomplex_ui/widgets/custom_toast_msg.dart';
 import '../../widgets/custom_text_field.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
-class OtpVerificationScreen extends StatefulWidget {
+class ResetPasswordScreen extends StatefulWidget {
   final bool isEmail;
   final String contact;
 
-  const OtpVerificationScreen({super.key,required this.isEmail,required this.contact});
+  const ResetPasswordScreen({required this.isEmail,required this.contact,super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _OtpVerificationScreenState createState() => _OtpVerificationScreenState();
+  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
 
-class _OtpVerificationScreenState extends State<OtpVerificationScreen> with CodeAutoFill {
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> with CodeAutoFill {
   final TextEditingController otpController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
   final AuthService _authService = AuthService();
   bool isEmail = true;
@@ -52,21 +55,31 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> with Code
       return null;
     }
 
-    void _verifyOtp() async {
+    String? passwordValidator(String? value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter your password';
+      }
+      if (value.length < 6) {
+        return 'Password must be at least 6 characters long';
+      }
+      return null;
+    }
+
+    void _resetPassword() async {
       if (_formKey.currentState!.validate()) {
-      String otp = otpController.text.trim();
       Map<String, dynamic> payload = widget.isEmail
-          ? {'email': widget.contact, 'otp': otp, 'isEmailSent':widget.isEmail}
-          : {'mobile': widget.contact, 'otp': otp, 'isEmailSent':widget.isEmail};
+          ? {'email': widget.contact, 'otp': otpController.text,'isEmailSent':isEmail}
+          : {'mobile': widget.contact, 'otp': passwordController.text,'isEmailSent':isEmail};
       try {
-        final response = await _authService.verifyOtp(payload);
+        final response = await _authService.resetPassword(payload);
         _showCustomToast(response['message'] ?? 'OTP verified successfully. Please login with credentials.', ToastStatus.success, icon: Icons.check_circle);
         if (mounted) {
           int count = 0;
           Navigator.of(context).popUntil((_) => count++ >= 2);
         }
       } catch (e) {
-        _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
+        print('Error: $e');  // Print error to console
+        _showCustomToast("Error to verify OTP : Please try again", ToastStatus.failure, icon: Icons.error);
       }
     }
     }
@@ -114,9 +127,31 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> with Code
                   prefixIcon: const Icon(Icons.lock),
                   helperText: 'Enter the 6-digit OTP',
                 ),
+                 CustomTextField(
+                  labelText: 'Password',
+                  controller: passwordController,
+                  isPassword: true,
+                  validator: passwordValidator,
+                  prefixIcon: const Icon(Icons.password),
+                ),
+                CustomTextField(
+                  labelText: 'Confirm Password',
+                  controller: confirmPasswordController,
+                  isPassword: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please confirm your password';
+                    }
+                    if (value != passwordController.text) {
+                      return 'Passwords do not match';
+                    }
+                    return null;
+                  },
+                  prefixIcon: const Icon(Icons.password),
+                ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: _verifyOtp,
+                  onPressed: _resetPassword,
                   style: ElevatedButton.styleFrom(
                     foregroundColor: AppColors.background, 
                     backgroundColor: AppColors.primary, // foreground (text) color

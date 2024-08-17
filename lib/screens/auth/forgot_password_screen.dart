@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mycomplex_ui/colors.dart';
 import 'package:mycomplex_ui/screens/auth/otp_verification_screen.dart';
+import 'package:mycomplex_ui/screens/auth/reset_password_screen.dart';
+import 'package:mycomplex_ui/services/auth_service.dart';
+import 'package:mycomplex_ui/widgets/custom_toast_msg.dart';
 import '../../widgets/custom_text_field.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -12,8 +16,9 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  final TextEditingController emailOrPhoneController = TextEditingController();
+  final TextEditingController emailOrMobileController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final AuthService _authService = AuthService();
   bool isEmail = true;
 
   String? emailValidator(String? value) {
@@ -36,6 +41,43 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       return 'Please enter a valid 10-digit phone number';
     }
     return null;
+  }
+
+  void _showCustomToast(String message, ToastStatus status, {IconData icon = Icons.info}) {
+    FToast fToast = FToast();
+    fToast.init(context);
+    Widget toast = CustomToastMsg(message: message, icon: icon, status: status);
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: const Duration(seconds: 2),
+    );
+  }
+
+
+  void _forgotPassword() async {
+    if (_formKey.currentState!.validate()) {
+      String emailOrMobile = emailOrMobileController.text.trim();
+      Map<String, dynamic> payload = isEmail
+          ? {'email': emailOrMobile,'isEmailSent': isEmail}
+          : {'mobile': emailOrMobile,'isEmailSent': isEmail};
+      try {
+        final response = await _authService.sendOTP(payload);
+        _showCustomToast(response['message'] ?? 'Login successful', ToastStatus.success, icon: Icons.check_circle);
+        if (mounted) {
+          if (!mounted) return;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ResetPasswordScreen(isEmail: isEmail,contact: emailOrMobile,),
+            ),
+          );
+        }
+      } catch (e) {
+        print('Error: $e');  // Print error to console
+        _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
+      }
+    }
   }
 
   @override
@@ -85,27 +127,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
                 CustomTextField(
                   labelText: isEmail ? 'Email' : 'Phone Number',
-                  controller: emailOrPhoneController,
+                  controller: emailOrMobileController,
                   inputType: isEmail ? TextInputType.emailAddress : TextInputType.phone,
                   validator: isEmail ? emailValidator : phoneValidator,
                   prefixIcon: isEmail ? const Icon(Icons.email) : const Icon(Icons.phone),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // Add forgot password logic here
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => OtpVerificationScreen(
-                            isEmail: isEmail,
-                            contact: emailOrPhoneController.text,
-                          ),
-                        ),
-                      );
-                    }
-                  },
+                  onPressed: _forgotPassword,
                   style: ElevatedButton.styleFrom(
                     foregroundColor: AppColors.background, backgroundColor: AppColors.primary, // foreground (text) color
                     minimumSize: const Size(double.infinity, 50), // full-width button
@@ -126,4 +155,5 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
     );
   }
+
 }

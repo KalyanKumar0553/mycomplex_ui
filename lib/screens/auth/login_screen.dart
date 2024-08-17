@@ -85,64 +85,33 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _checkLoginStatus() async {
-    String? token = await SharedPreferencesHelper.getValue(SharedPreferencesKeys.bearerTokenKey);
+    String? bearer_token = await SharedPreferencesHelper.getValue(SharedPreferencesKeys.bearerTokenKey);
     String? userID = await SharedPreferencesHelper.getValue(SharedPreferencesKeys.userIDKey);
     if (!mounted) return;
-
-    if (token != null) {
-      // Navigate to Dashboard if the token is available
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DashboardScreen(token: token,userID: userID.toString(),),
-          ),
-      );
+    if (bearer_token != null) {
+      context.go('/dashboard', extra: {'token': bearer_token, 'userID': userID});
     }
   }
 
   void _login() async {
-    String randomString = generateRandomString(10);
-    await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,randomString);
-    await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,'12asdqw');
-    if (!mounted) return;
-    context.go('/dashboard', extra: {'token': randomString, 'userID': '12asdqw'});    
-    // Navigator.push(
-    //       context,
-    //       MaterialPageRoute(
-    //         builder: (context) => DashboardScreen(token: randomString,userID: '12asdqw',),
-    //       ),
-    // );
-    
-    // if (_formKey.currentState!.validate()) {
-    //   String emailOrMobile = emailOrMobileController.text.trim();
-    //   String password = passwordController.text.trim();
-    //   Map<String, dynamic> payload = isEmail
-    //       ? {'email': emailOrMobile, 'password': password, 'isEmailSent': isEmail}
-    //       : {'mobile': emailOrMobile, 'password': password, 'isEmailSent': isEmail};
-    //   try {
-    //     final response = await _authService.login(payload);
-    //     _showCustomToast(response['message'] ?? 'Login successful', ToastStatus.success, icon: Icons.check_circle);
-    //     if (mounted) {
-    //       await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,generateRandomString(6));
-    //       await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,emailOrMobile);
-    //       if (!mounted) return;
-    //       if(emailOrMobile=='test@user.com' && password == 'test1234') {
-    //           String randomString = generateRandomString(10);
-    //           Navigator.push(
-    //               context,
-    //               MaterialPageRoute(
-    //                 builder: (context) => DashboardScreen(token: randomString,userID: emailOrMobile,),
-    //               ),
-    //           );
-    //       } else {
-    //         throw Exception("Error : Invalid Credentials");
-    //       }
-    //     }
-    //   } catch (e) {
-    //     print('Error: $e');  // Print error to console
-    //     _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
-    //   }
-    // }
+    if (_formKey.currentState!.validate()) {
+      String emailOrMobile = emailOrMobileController.text.trim();
+      String password = passwordController.text.trim();
+      Map<String, dynamic> payload = isEmail
+          ? {'email': emailOrMobile, 'password': password, 'isEmailSent': isEmail}
+          : {'mobile': emailOrMobile, 'password': password, 'isEmailSent': isEmail};
+      try {
+          final response = await _authService.login(payload);
+          String bearer_token = response['tokenType'] + ' ' +response['accessToken'];
+          _showCustomToast('Login successful', ToastStatus.success, icon: Icons.check_circle);
+          await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.bearerTokenKey,bearer_token);
+          await SharedPreferencesHelper.saveValue(SharedPreferencesKeys.userIDKey,emailOrMobile);
+          if (!mounted) return;
+          context.go('/dashboard', extra: {'token': bearer_token, 'userID': emailOrMobile});
+      } catch (e) {
+        _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
+      }
+    }
   }
 
   @override

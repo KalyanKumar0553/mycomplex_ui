@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mycomplex_ui/screens/search_screen.dart';
+import 'package:mycomplex_ui/screens/search/search_header_screen.dart';
 import '../../colors.dart';
 
 // ignore: must_be_immutable
@@ -57,7 +57,7 @@ class DashboardHeader extends StatelessWidget {
                 onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SearchScreen(selectedApartmentID: selectedApartmentID,apartments:apartments,onApartmentChanged: onApartmentChanged,userID: "",)),
+                  MaterialPageRoute(builder: (context) => SearchHeaderScreen(selectedApartmentID: selectedApartmentID,apartments:apartments,onApartmentChanged: onApartmentChanged,userID: "",)),
                 );
               },
               ),

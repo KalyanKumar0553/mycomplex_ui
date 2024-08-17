@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../colors.dart';
+import '../../../colors.dart';
 import 'profile_bio_tab.dart';
 import 'contact_details_tab.dart';
 

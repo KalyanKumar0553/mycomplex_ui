@@ -8,6 +8,7 @@ class AppColors {
   static const Color success = Colors.green;
   static const Color error = Color.fromARGB(255, 169, 69, 62);
   static const Color textColor = Color.fromARGB(255, 91, 86, 86);
+  static const Color inputBorderColor = Color.fromARGB(255, 197, 191, 191);
   static const Color bottomNavigationButton = Color.fromARGB(255, 232, 167, 167);
   static const Color ratingColors = Colors.amber;
   static const Color primaryColor = Color(0xFF6200EE); // Example primary color
@@ -20,4 +21,5 @@ class AppColors {
   static const Color calendarBGColor = Color.fromRGBO(224, 224, 224, 1);
   static const transparent=Colors.transparent; // Border color
   static const Color buttonColors = Colors.yellow;
+  static const Color expandTileBackground = Color.fromARGB(255, 236, 235, 232);
 }
