@@ -132,21 +132,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  void _logout(BuildContext context) async {
-      String? bearer_token = await SharedPreferencesHelper.getValue(SharedPreferencesKeys.bearerTokenKey);
-      String? userID = await SharedPreferencesHelper.getValue(SharedPreferencesKeys.userIDKey);
-      if (!mounted) return;
+  void _logout() async {
       try {
         Map<String, dynamic> payload = {};
-        final response = await _authService.logout(payload);
-        _showCustomToast(response['message'] ?? 'Login successful', ToastStatus.success, icon: Icons.check_circle);
+        await _authService.logout(payload);
+        _showCustomToast('User loggedout succesfully', ToastStatus.success, icon: Icons.check_circle);
+      } catch (e) {
+        _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
+      } finally {
+        await SharedPreferencesHelper.removeValue(SharedPreferencesKeys.bearerTokenKey);
+        await SharedPreferencesHelper.removeValue(SharedPreferencesKeys.userIDKey);
         if (mounted) {
           if (!mounted) return;
           context.go('/login');
         }
-      } catch (e) {
-        print('Error: $e');  // Print error to console
-        _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
       }
       
   }
@@ -275,7 +274,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       SettingOption(
                         icon: Icons.logout,
                         title: 'Logout',
-                        onTap: () => _logout,
+                        onTap: () => _logout(),
                       ),
                     ],
                   ),

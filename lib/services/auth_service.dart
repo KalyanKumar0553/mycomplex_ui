@@ -6,6 +6,8 @@ import 'package:mycomplex_ui/helper/shared_preferences_helper.dart';
 class AuthService {
   
   static const String baseURL = 'https://mycomplex-api.azurewebsites.net';
+  // static const String baseURL = 'http://localhost:8080';
+
   static const String signupUrl = baseURL + '/api/auth/signup';
   static const String loginUrl = baseURL + '/api/auth/login';
   static const String otpVerifyUrl = baseURL + '/api/auth/verify';
@@ -24,10 +26,7 @@ class AuthService {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      Map<String, dynamic> errorResponse = jsonDecode(response.body);
-      print('errorResponse');
-      print(errorResponse['message']);
-      throw Exception(errorResponse['message']?? 'Failed to sign up : Please Try Again' );
+      throw Exception('Failed to sign up : Please Try Again' );
     }
   }
 
@@ -43,8 +42,7 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body)['statusMsg'];
     } else {
-      Map<String, dynamic> errorResponse = jsonDecode(response.body);
-      throw Exception(errorResponse['message']?? 'Failed to login : Please Try Again' );
+      throw Exception('Failed to login : Please Try Again' );
     }
   }
 
@@ -60,8 +58,7 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      Map<String, dynamic> errorResponse = jsonDecode(response.body);
-      throw Exception(errorResponse['message'] ?? 'Failed to verify OTP : Please Try Again' );
+      throw Exception('Failed to verify OTP : Please Try Again' );
     }
   }
 
@@ -77,8 +74,7 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      Map<String, dynamic> errorResponse = jsonDecode(response.body);
-      throw Exception(errorResponse['message']?? 'Failed to Reset Password : Please Try Again' );
+      throw Exception('Failed to Reset Password : Please Try Again' );
     }
   }
 
@@ -94,12 +90,11 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      Map<String, dynamic> errorResponse = jsonDecode(response.body);
-      throw Exception(errorResponse['message']?? 'Failed to Send OTP : Please Try Again' );
+      throw Exception('Failed to Send OTP : Please Try Again' );
     }
   }
 
-    Future<Map<String, dynamic>> logout(Map<String, dynamic> payload) async {
+    Future<String> logout(Map<String, dynamic> payload) async {
       String bearerToken = await SharedPreferencesHelper.getValue(SharedPreferencesKeys.bearerTokenKey) ?? '';
       final response = await http.post(
         Uri.parse(logoutUrl),
@@ -110,10 +105,9 @@ class AuthService {
         body: jsonEncode(payload),
       );
       if (response.statusCode == 200) {
-        return jsonDecode(response.body)['statusMsg'];
+        return Future.value('User logged out succesfully');
       } else {
-        Map<String, dynamic> errorResponse = jsonDecode(response.body);
-        throw Exception(errorResponse['message']?? 'Failed to logout : Please Try Again' );
+        throw Exception('Failed to logout : Please Try Again' );
       }
   }
 }

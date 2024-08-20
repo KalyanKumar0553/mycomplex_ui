@@ -22,6 +22,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool isLoading =false;
   final TextEditingController emailOrMobileController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -101,6 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
           ? {'email': emailOrMobile, 'password': password, 'isEmailSent': isEmail}
           : {'mobile': emailOrMobile, 'password': password, 'isEmailSent': isEmail};
       try {
+          setState(() {
+            isLoading = true;
+          });
           final response = await _authService.login(payload);
           String bearer_token = response['tokenType'] + ' ' +response['accessToken'];
           _showCustomToast('Login successful', ToastStatus.success, icon: Icons.check_circle);
@@ -110,6 +114,10 @@ class _LoginScreenState extends State<LoginScreen> {
           context.go('/dashboard', extra: {'token': bearer_token, 'userID': emailOrMobile});
       } catch (e) {
         _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
+      } finally {
+        setState(() {
+            isLoading = false;
+        });
       }
     }
   }
@@ -173,6 +181,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     helperText: 'Enter your password',
                   ),
                   const SizedBox(height: 16),
+                  isLoading ? Column(
+                  children: [
+                      Center(
+                          child: SizedBox(
+                            child: CircularProgressIndicator(color: AppColors.primary,),
+                            height: 20,
+                            width: 20,
+                          ),
+                      )
+                    ],
+                  ):
                   ElevatedButton(
                     onPressed: _login,
                     style: ElevatedButton.styleFrom(
@@ -182,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text('Login'),
                   ),
                   const SizedBox(height: 8),
-                  TextButton(
+                  isLoading ? Container() : TextButton(
                     onPressed: () {
                       // context.go('/forgot_password');
                       Navigator.push(
@@ -194,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: const Text('Forgot password?'),
                   ),
-                  TextButton(
+                  isLoading ? Container() : TextButton(
                     onPressed: () {
                       Navigator.push(
                           context,
