@@ -20,6 +20,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final AuthService _authService = AuthService();
   bool isEmail = true;
+  bool isForgotPasswordRequestInProgress = false;
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -57,6 +58,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   void _forgotPassword() async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        isForgotPasswordRequestInProgress = true;
+      });
       String emailOrMobile = emailOrMobileController.text.trim();
       Map<String, dynamic> payload = isEmail
           ? {'email': emailOrMobile,'isEmailSent': isEmail}
@@ -74,8 +78,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           );
         }
       } catch (e) {
-        print('Error: $e');  // Print error to console
         _showCustomToast(e.toString(), ToastStatus.failure, icon: Icons.error);
+      } finally {
+        setState(() {
+          isForgotPasswordRequestInProgress = false;
+        });
       }
     }
   }
@@ -133,6 +140,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   prefixIcon: isEmail ? const Icon(Icons.email) : const Icon(Icons.phone),
                 ),
                 const SizedBox(height: 16),
+                isForgotPasswordRequestInProgress ? Column(
+                  children: [
+                    Center(
+                      child: SizedBox(
+                        child: CircularProgressIndicator(color: AppColors.primary,),
+                        height: 20,
+                        width: 20,
+                      ),
+                    )
+                  ],
+                ):
                 ElevatedButton(
                   onPressed: _forgotPassword,
                   style: ElevatedButton.styleFrom(
@@ -142,7 +160,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   child: const Text('Reset Password'),
                 ),
                 const SizedBox(height: 8),
-                TextButton(
+                isForgotPasswordRequestInProgress ? Container(height: 0,) : TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },

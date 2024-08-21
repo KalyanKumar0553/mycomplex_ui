@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     'assets/images/logo.png',
                     height: 200,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 8),
                   const Text(
                     'Enter your credentials to login',
                     style: TextStyle(fontSize: 16,

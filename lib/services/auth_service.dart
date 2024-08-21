@@ -26,7 +26,8 @@ class AuthService {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('Failed to sign up : Please Try Again' );
+      Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      throw Exception(errorResponse['message'] ?? 'Failed to sign up : Please Try Again' );
     }
   }
 
@@ -42,7 +43,8 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body)['statusMsg'];
     } else {
-      throw Exception('Failed to login : Please Try Again' );
+      Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      throw Exception(errorResponse['message'] ?? 'Failed to login : Please Try Again' );
     }
   }
 
@@ -58,7 +60,8 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to verify OTP : Please Try Again' );
+      Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      throw Exception(errorResponse['message'] ?? 'Failed to verify OTP' );
     }
   }
 
@@ -74,7 +77,8 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to Reset Password : Please Try Again' );
+      Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      throw Exception(errorResponse['message'] ?? 'Failed to Reset Password : Please Try Again' );
     }
   }
 
@@ -90,7 +94,8 @@ class AuthService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to Send OTP : Please Try Again' );
+      Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      throw Exception(errorResponse['message'] ?? 'Failed to Send OTP : Please Try Again' );
     }
   }
 
@@ -107,7 +112,8 @@ class AuthService {
       if (response.statusCode == 200) {
         return Future.value('User logged out succesfully');
       } else {
-        throw Exception('Failed to logout : Please Try Again' );
+        Map<String, dynamic> errorResponse = jsonDecode(response.body);
+        throw Exception(errorResponse['message'] ?? 'Failed to logout : Please Try Again' );
       }
   }
 }
