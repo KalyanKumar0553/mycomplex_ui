@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mycomplex_ui/colors.dart';
 import 'package:mycomplex_ui/widgets/mobile_html_content_view.dart';
-import 'package:mycomplex_ui/widgets/web_html_content_view.dart';
 
 class PrivacyPolicySettingsScreen extends StatefulWidget {
   final String selectedApartmentID;
@@ -43,8 +42,7 @@ class _PrivacyPolicySettingsScreenState extends State<PrivacyPolicySettingsScree
             ),
           ],
         ),
-        // body: MobileHtmlContentView(urlToDisplay:urlToDisplay)
-        body: WebHtmlContentView(urlToDisplay:urlToDisplay)
+        body: MobileHtmlContentView(urlToDisplay:urlToDisplay)
      );
   }
 }

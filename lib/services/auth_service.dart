@@ -5,8 +5,8 @@ import 'package:mycomplex_ui/helper/shared_preferences_helper.dart';
 
 class AuthService {
   
-  static const String baseURL = 'https://mycomplex-api.azurewebsites.net';
-  // static const String baseURL = 'http://localhost:8080';
+  // static const String baseURL = 'https://mycomplex-api.azurewebsites.net';
+  static const String baseURL = 'http://localhost:8080';
 
   static const String signupUrl = baseURL + '/api/auth/signup';
   static const String loginUrl = baseURL + '/api/auth/login';
